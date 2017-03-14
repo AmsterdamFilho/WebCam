@@ -1,6 +1,6 @@
 package br.com.luvva.webcam;
 
-import br.com.jwheel.core.service.java.ResourceProvider;
+import br.com.jwheel.utils.ResourceProvider;
 
 import javax.inject.Singleton;
 
