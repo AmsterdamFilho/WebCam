@@ -1,4 +1,5 @@
 .idea
 *.iml
 
-target
+core/target
+test/target
