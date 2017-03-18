@@ -1,5 +1,6 @@
 package br.com.luvva.webcam.test;
 
+import br.com.jwheel.xml.model.FromXmlPreferences;
 import br.com.jwheel.xml.model.PathPreferences;
 import br.com.luvva.webcam.WebcamController;
 import br.com.luvva.webcam.WebcamPreferences;
@@ -32,9 +33,10 @@ public class WebcamTestController implements Initializable
     private @FXML ComboBox<String>  cmbWebcam;
     private @FXML WebcamController  webcamController;
 
-    private @Inject PathPreferences   pathPreferences;
-    private @Inject WebcamPreferences webcamPreferences;
-    private @Inject Logger            logger;
+    private @Inject PathPreferences pathPreferences;
+    private @Inject Logger          logger;
+
+    private @Inject @FromXmlPreferences WebcamPreferences webcamPreferences;
 
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmssSSS");
 

@@ -1,6 +1,7 @@
 package br.com.luvva.webcam;
 
-import br.com.jwheel.cdi.WeldContext;
+import br.com.jwheel.weld.WeldContext;
+import br.com.jwheel.xml.model.FromXmlPreferences;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamException;
 import javafx.application.Platform;
@@ -15,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import org.slf4j.Logger;
 
+import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.awt.image.BufferedImage;
@@ -54,7 +56,7 @@ public class WebcamController implements Initializable
 
     public void preferencesChanged (String newPreferredWebcam)
     {
-        WebcamPreferences webcamPreferences = WeldContext.getInstance().getDefault(WebcamPreferences.class);
+        WebcamPreferences webcamPreferences = new WebcamPreferences();
         webcamPreferences.setPreferredWebcam(newPreferredWebcam);
         WebcamPreferencesDao dao = WeldContext.getInstance().getAny(WebcamPreferencesDao.class);
         try
@@ -225,7 +227,8 @@ public class WebcamController implements Initializable
         @Override
         public void start ()
         {
-            WebcamPreferences preferences = WeldContext.getInstance().getDefault(WebcamPreferences.class);
+            WebcamPreferences preferences = WeldContext.getInstance().getWithQualifiers(
+                    WebcamPreferences.class, new AnnotationLiteral<FromXmlPreferences>() {});
             String preferredWebCam = preferences.getPreferredWebcam();
             if (!(preferredWebCam == null || preferredWebCam.trim().isEmpty()))
             {

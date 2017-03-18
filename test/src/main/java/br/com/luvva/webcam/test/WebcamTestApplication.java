@@ -1,7 +1,7 @@
 package br.com.luvva.webcam.test;
 
-import br.com.jwheel.javafx.utils.JwFxmlLoader;
-import br.com.jwheel.template.control.JavaFxApplication;
+import br.com.jwheel.javafx.JWheelFxmlLoader;
+import br.com.jwheel.javafx.JavaFxApplication;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -11,16 +11,10 @@ import javax.inject.Inject;
 /**
  * @author Lima Filho, A. L. - amsterdam@luvva.com.br
  */
-public class WebcamTestApplication extends JavaFxApplication
+public class WebcamTestApplication implements JavaFxApplication
 {
     private @Inject WebcamTestResourcesProvider resourceProvider;
     private @Inject Logger                      logger;
-
-    @Override
-    public boolean databaseConnectionOk ()
-    {
-        return true;
-    }
 
     @Override
     public void init (Stage primaryStage)
@@ -29,8 +23,7 @@ public class WebcamTestApplication extends JavaFxApplication
         {
             Stage newPrimaryStage = new Stage();
             newPrimaryStage.setTitle("Webcam framework test");
-            newPrimaryStage.setScene(new Scene(JwFxmlLoader.loadWithCdi(
-                    resourceProvider.getMainSceneFxml())));
+            newPrimaryStage.setScene(new Scene(JWheelFxmlLoader.loadWithCdi(resourceProvider.getMainSceneFxml())));
             newPrimaryStage.centerOnScreen();
 
             primaryStage.close();
