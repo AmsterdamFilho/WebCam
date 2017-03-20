@@ -101,6 +101,6 @@ public class WebcamTestController implements Initializable
     @Override
     public void initialize (URL location, ResourceBundle resources)
     {
-        new Thread(this::loadWebcams).start();
+        new Thread(this::loadWebcams, "Webcams loading thread").start();
     }
 }

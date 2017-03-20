@@ -77,7 +77,7 @@ public class WebcamController implements Initializable
     }
 
     /**
-     * Gets current available webcam list. Might take a while to return. If an error,
+     * Gets current available webcam list. Might take a while to return. If an error
      * occurs, it will be logged and an empty list will be returned.
      *
      * @param timeOutMs how long in milliseconds before an exception is thrown
@@ -111,10 +111,11 @@ public class WebcamController implements Initializable
         private boolean hasStarted             = false;
         private int     snapshotExceptionCount = 0;
 
-        private final Thread shutdownHook = new Thread(this::closeImpl);
+        private final Thread shutdownHook = new Thread(this::closeImpl, "Webcam shutdown hook thread");
 
         private DefaultWebcamStreamTask (Webcam webcam)
         {
+            super("Webcam stream thread");
             this.webcam = webcam;
             setDaemon(true);
             Runtime.getRuntime().addShutdownHook(shutdownHook);
